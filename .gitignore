@@ -1,0 +1,9 @@
+# Diretórios e arquivos específicos do Front-end (Vite/React)
+/front/node_modules
+/front/dist  # Se o seu build do front-end for para 'dist'
+
+# Diretórios e arquivos gerados pelo ambiente
+.env
+.DS_Store
+npm-debug.log*
+yarn-error.log*
