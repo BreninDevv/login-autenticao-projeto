@@ -10,8 +10,9 @@ app.post("/api/saudacao", (req, res) => {
   const { nome } = req.body;
   if (!nome) {
     return res.status(400).json({ erro: "Nome é obrigatório" });
+  } else {
+    return res.json({ mensagem: `Olá, ${nome}! Seja bem-vindo(a).` });
   }
-  return res.json({ mensagem: `Olá, ${nome}! Seja bem-vindo(a).` });
 });
 
 app.listen(3000, () => {
