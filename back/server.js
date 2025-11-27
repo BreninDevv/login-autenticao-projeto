@@ -1,10 +1,25 @@
 import express from "express";
 import cors from "cors";
+import dotenv from "dotenv";
 
+dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+const { USUARIO, SENHA } = process.env;
+
+app.post("/api/login", (req, res) => {
+  const { email, password } = req.body;
+
+  if (email === USUARIO && password === SENHA) {
+    res.redirect("http://localhost:5173/salve");
+  } else {
+    res.status(401).send("<h1>Login e senha inválidos.</h1>");
+  }
+});
 
 app.post("/api/saudacao", (req, res) => {
   const { nome } = req.body;
