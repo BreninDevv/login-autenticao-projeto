@@ -15,9 +15,9 @@ app.post("/api/login", (req, res) => {
   const { email, password } = req.body;
 
   if (email === USUARIO && password === SENHA) {
-    res.redirect("http://localhost:5173/salve");
+    res.json({ message: "Acesso liberado!" });
   } else {
-    res.status(401).send("<h1>Login e senha inválidos.</h1>");
+    res.sendStatus(403);
   }
 });
 
