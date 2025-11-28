@@ -1,8 +1,12 @@
 import { useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Salve = () => {
   const [nome, setNome] = useState("");
   const [mensagem, setMensagem] = useState("");
+  const navigate = useNavigate();
 
   const enviarNome = async () => {
     if (nome) {
@@ -20,6 +24,31 @@ const Salve = () => {
       }
     }
   };
+  useEffect(() => {
+    const validarUsuario = async () => {
+      const token = localStorage.getItem("token");
+
+      if (!token) navigate("/");
+
+      try {
+        const response = await axios.get(
+          "http://localhost:3000/api/validacao",
+          {
+            headers: { Authorization: `bearer ${token}` },
+          }
+        );
+        if (response.status === 403) {
+          navigate("/");
+        } else {
+          console.log(`Acesso autorizado, ${response.data.email.email}!`);
+        }
+      } catch (error) {
+        navigate("/");
+        console.error({ error });
+      }
+    };
+    validarUsuario();
+  }, []);
 
   return (
     <>

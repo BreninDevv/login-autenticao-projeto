@@ -14,10 +14,12 @@ const Login = () => {
         email,
         password,
       });
+      localStorage.setItem("token", response.data.token);
       console.log(response.data);
       navigate("/salve");
     } catch (error) {
       console.error({ error });
+      alert("Email ou senha inválida.");
     }
   };
 
